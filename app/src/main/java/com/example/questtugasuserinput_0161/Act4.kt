@@ -45,3 +45,30 @@ fun FormDataDiri(modifier: Modifier = Modifier) {
     var submittedExperience by remember { mutableStateOf("") }
     var submittedSkills by remember { mutableStateOf("") }
 
+    if (showDatePicker) {
+        DatePickerDialog(
+            onDismissRequest = { showDatePicker = false },
+            confirmButton = {
+                TextButton(
+                    onClick = {
+                        datePickerState.selectedDateMillis?.let { millis ->
+                            val sdf = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
+                            tglLahir = sdf.format(Date(millis))
+                        }
+                        showDatePicker = false
+                    }
+                ) {
+                    Text("OK")
+                }
+            },
+            dismissButton = {
+                TextButton(onClick = { showDatePicker = false }) {
+                    Text("Cancel")
+                }
+            }
+        ) {
+            DatePicker(state = datePickerState)
+        }
+    }
+
+    }
