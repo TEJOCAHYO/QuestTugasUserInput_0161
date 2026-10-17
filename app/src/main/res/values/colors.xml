@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="purple_header">#6200EE</color>
+    <color name="card_background">#000000</color>
+    <color name="text_white">#FFFFFF</color>
+    <color name="text_dark">#333333</color>
+    <color name="button_bg">#E0E0E0</color>
+    <color name="button_text">#000000</color>
+    <color name="divider_color">#CCCCCC</color>
+</resources>

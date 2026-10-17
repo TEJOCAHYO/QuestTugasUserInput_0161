@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="padding_small">8dp</dimen>
+    <dimen name="padding_medium">16dp</dimen>
+    <dimen name="padding_large">24dp</dimen>
+    <dimen name="header_height">250dp</dimen>
+    <dimen name="content_top_padding">200dp</dimen>
+    <dimen name="corner_radius_large">32dp</dimen>
+    <dimen name="divider_tipis">1dp</dimen>
+    <dimen name="card_elevation">8dp</dimen>
+</resources>
