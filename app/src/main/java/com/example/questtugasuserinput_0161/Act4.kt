@@ -28,4 +28,11 @@ fun FormDataDiri(modifier: Modifier = Modifier) {
     var tglLahir by remember { mutableStateOf("") }
     var experience by remember { mutableStateOf("") }
 
-  }
+    var showDatePicker by remember { mutableStateOf(false) }
+    val datePickerState = rememberDatePickerState()
+
+    var skillAndroid by remember { mutableStateOf(false) }
+    var skillUiUx by remember { mutableStateOf(false) }
+    var skillWeb by remember { mutableStateOf(false) }
+
+    }
