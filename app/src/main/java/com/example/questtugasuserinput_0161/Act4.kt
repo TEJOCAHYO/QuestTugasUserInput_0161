@@ -35,4 +35,13 @@ fun FormDataDiri(modifier: Modifier = Modifier) {
     var skillUiUx by remember { mutableStateOf(false) }
     var skillWeb by remember { mutableStateOf(false) }
 
-    }
+    var expandedExperience by remember { mutableStateOf(false) }
+    val expList = listOf("Beginner (< 1 thn)", "Intermediate (1-3 thn)", "Expert (> 3 thn)")
+
+    var submittedNamaDepan by remember { mutableStateOf("") }
+    var submittedNamaBelakang by remember { mutableStateOf("") }
+    var submittedEmail by remember { mutableStateOf("") }
+    var submittedTglLahir by remember { mutableStateOf("") }
+    var submittedExperience by remember { mutableStateOf("") }
+    var submittedSkills by remember { mutableStateOf("") }
+
