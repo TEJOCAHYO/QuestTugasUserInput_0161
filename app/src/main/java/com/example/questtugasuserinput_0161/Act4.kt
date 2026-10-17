@@ -28,47 +28,4 @@ fun FormDataDiri(modifier: Modifier = Modifier) {
     var tglLahir by remember { mutableStateOf("") }
     var experience by remember { mutableStateOf("") }
 
-    var showDatePicker by remember { mutableStateOf(false) }
-    val datePickerState = rememberDatePickerState()
-
-    var skillAndroid by remember { mutableStateOf(false) }
-    var skillUiUx by remember { mutableStateOf(false) }
-    var skillWeb by remember { mutableStateOf(false) }
-
-    var expandedExperience by remember { mutableStateOf(false) }
-    val expList = listOf("Beginner (< 1 thn)", "Intermediate (1-3 thn)", "Expert (> 3 thn)")
-
-    var submittedNamaDepan by remember { mutableStateOf("") }
-    var submittedNamaBelakang by remember { mutableStateOf("") }
-    var submittedEmail by remember { mutableStateOf("") }
-    var submittedTglLahir by remember { mutableStateOf("") }
-    var submittedExperience by remember { mutableStateOf("") }
-    var submittedSkills by remember { mutableStateOf("") }
-
-    if (showDatePicker) {
-        DatePickerDialog(
-            onDismissRequest = { showDatePicker = false },
-            confirmButton = {
-                TextButton(
-                    onClick = {
-                        datePickerState.selectedDateMillis?.let { millis ->
-                            val sdf = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
-                            tglLahir = sdf.format(Date(millis))
-                        }
-                        showDatePicker = false
-                    }
-                ) {
-                    Text("OK")
-                }
-            },
-            dismissButton = {
-                TextButton(onClick = { showDatePicker = false }) {
-                    Text("Cancel")
-                }
-            }
-        ) {
-            DatePicker(state = datePickerState)
-        }
-    }
-
-    }
+  }
