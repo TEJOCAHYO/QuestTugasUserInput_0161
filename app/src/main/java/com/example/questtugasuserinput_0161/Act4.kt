@@ -146,4 +146,184 @@ fun FormDataDiri(modifier: Modifier = Modifier) {
                         )
                     }
 
+                    Spacer(modifier = Modifier.height(dimensionResource(R.dimen.padding_small)))
+
+                    OutlinedTextField(
+                        value = email,
+                        onValueChange = { email = it },
+                        label = { Text(stringResource(R.string.label_email)) },
+                        singleLine = true,
+                        shape = MaterialTheme.shapes.medium,
+                        modifier = Modifier.fillMaxWidth()
+                    )
+
+                    Spacer(modifier = Modifier.height(dimensionResource(R.dimen.padding_small)))
+
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.spacedBy(dimensionResource(R.dimen.padding_small))
+                    ) {
+                        OutlinedTextField(
+                            value = tglLahir,
+                            onValueChange = { tglLahir = it },
+                            readOnly = true,
+                            placeholder = { Text(stringResource(R.string.label_tgl_lahir)) },
+                            singleLine = true,
+                            shape = MaterialTheme.shapes.medium,
+                            trailingIcon = {
+                                IconButton(onClick = { showDatePicker = true }) {
+                                    Icon(
+                                        painter = painterResource(id = android.R.drawable.ic_menu_my_calendar),
+                                        contentDescription = null
+                                    )
+                                }
+                            },
+                            modifier = Modifier.weight(1f)
+                        )
+
+                        ExposedDropdownMenuBox(
+                            expanded = expandedExperience,
+                            onExpandedChange = { expandedExperience = !expandedExperience },
+                            modifier = Modifier.weight(1f)
+                        ) {
+                            OutlinedTextField(
+                                value = experience,
+                                onValueChange = {},
+                                readOnly = true,
+                                label = { Text(stringResource(R.string.label_experience)) },
+                                trailingIcon = { ExposedDropdownMenuDefaults.TrailingIcon(expanded = expandedExperience) },
+                                shape = MaterialTheme.shapes.medium,
+                                modifier = Modifier.menuAnchor(ExposedDropdownMenuAnchorType.PrimaryNotEditable, true)
+                            )
+                            ExposedDropdownMenu(
+                                expanded = expandedExperience,
+                                onDismissRequest = { expandedExperience = false }
+                            ) {
+                                expList.forEach { item ->
+                                    DropdownMenuItem(
+                                        text = { Text(item) },
+                                        onClick = {
+                                            experience = item
+                                            expandedExperience = false
+                                        }
+                                    )
+                                }
+                            }
+                        }
                     }
+
+                    Spacer(modifier = Modifier.height(dimensionResource(R.dimen.padding_medium)))
+
+                    Text(
+                        text = stringResource(R.string.label_pilih_skill),
+                        style = MaterialTheme.typography.bodyMedium,
+                        fontWeight = FontWeight.Bold,
+                        modifier = Modifier.fillMaxWidth()
+                    )
+
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.SpaceBetween,
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        Row(verticalAlignment = Alignment.CenterVertically) {
+                            Checkbox(
+                                checked = skillAndroid,
+                                onCheckedChange = { skillAndroid = it }
+                            )
+                            Text(stringResource(R.string.skill_android))
+                        }
+                        Row(verticalAlignment = Alignment.CenterVertically) {
+                            Checkbox(
+                                checked = skillUiUx,
+                                onCheckedChange = { skillUiUx = it }
+                            )
+                            Text(stringResource(R.string.skill_uiux))
+                        }
+                        Row(verticalAlignment = Alignment.CenterVertically) {
+                            Checkbox(
+                                checked = skillWeb,
+                                onCheckedChange = { skillWeb = it }
+                            )
+                            Text(stringResource(R.string.skill_web))
+                        }
+                    }
+
+                    Spacer(modifier = Modifier.height(dimensionResource(R.dimen.padding_medium)))
+
+                    Button(
+                        onClick = {
+                            submittedNamaDepan = namaDepan
+                            submittedNamaBelakang = namaBelakang
+                            submittedEmail = email
+                            submittedTglLahir = tglLahir
+                            submittedExperience = experience
+
+                            val selectedSkills = mutableListOf<String>()
+                            if (skillAndroid) selectedSkills.add("Android")
+                            if (skillUiUx) selectedSkills.add("UI/UX")
+                            if (skillWeb) selectedSkills.add("Web")
+                            submittedSkills = selectedSkills.joinToString(", ")
+                        },
+                        modifier = Modifier.fillMaxWidth(),
+                        shape = MaterialTheme.shapes.medium,
+                        colors = ButtonDefaults.buttonColors(
+                            containerColor = colorResource(R.color.button_bg),
+                            contentColor = colorResource(R.color.button_text)
+                        )
+                    ) {
+                        Text(
+                            text = stringResource(R.string.btn_proceed),
+                            fontWeight = FontWeight.Bold
+                        )
+                    }
+
+                    HorizontalDivider(
+                        modifier = Modifier.padding(vertical = dimensionResource(R.dimen.padding_medium)),
+                        thickness = dimensionResource(R.dimen.divider_tipis),
+                        color = colorResource(R.color.divider_color)
+                    )
+
+                    if (submittedNamaDepan.isNotEmpty()) {
+                        ElevatedCard(
+                            elevation = CardDefaults.cardElevation(
+                                defaultElevation = dimensionResource(R.dimen.card_elevation)
+                            ),
+                            colors = CardDefaults.cardColors(
+                                containerColor = colorResource(R.color.card_background)
+                            ),
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(vertical = dimensionResource(R.dimen.padding_small))
+                        ) {
+                            Column(
+                                modifier = Modifier.padding(dimensionResource(R.dimen.padding_medium))
+                            ) {
+                                Text(
+                                    text = stringResource(R.string.output_nama, submittedNamaDepan, submittedNamaBelakang),
+                                    color = colorResource(R.color.text_white)
+                                )
+                                Text(
+                                    text = stringResource(R.string.output_email, submittedEmail),
+                                    color = colorResource(R.color.text_white)
+                                )
+                                Text(
+                                    text = stringResource(R.string.output_tgl_lahir, submittedTglLahir),
+                                    color = colorResource(R.color.text_white)
+                                )
+                                Text(
+                                    text = stringResource(R.string.output_experience, submittedExperience),
+                                    color = colorResource(R.color.text_white)
+                                )
+                                Text(
+                                    text = stringResource(R.string.output_skill, submittedSkills),
+                                    color = colorResource(R.color.text_white)
+                                )
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
